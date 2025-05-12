@@ -1,24 +1,26 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title> My Profile </ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Chat 2025A
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="preview">
-    <ion-avatar (click)="changeImage()">
-      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" />
-
-      <ng-template #placeholder_avatar>
-        <div class="fallback">
-          <p>Select avatar</p>
-        </div>
-      </ng-template>
-    </ion-avatar>
-  </div>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let msg of messages">
+      <ion-label>
+        <h3>{{ msg.sender }}</h3>
+        <p>{{ msg.text }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje" fill="outline"></ion-input>
+    <ion-button expand="block" (click)="sendMessage()">Enviar</ion-button>
+  </ion-toolbar>
+</ion-footer>
+
